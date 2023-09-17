@@ -1,6 +1,7 @@
 import { Column, useTable } from "react-table";
 import { useMemo } from "react";
 import { csvToJson } from "@/utils/csvToJson";
+import { downloadStringAsFile } from "@/utils/downloadAsString";
 
 export interface TableProps {
   csvString: string;
@@ -9,6 +10,7 @@ export interface TableProps {
 export default function Table({ csvString }: TableProps) {
   const tableData = useMemo(() => {
     const [headers, ...data] = csvToJson(csvString);
+
     const columns: Column[] = [];
     Object.keys(headers).forEach((header) => {
       columns.push({
@@ -16,6 +18,7 @@ export default function Table({ csvString }: TableProps) {
         accessor: header,
       });
     });
+
     return { columns, data };
   }, [csvString]);
 
@@ -24,8 +27,24 @@ export default function Table({ csvString }: TableProps) {
       columns: tableData.columns,
       data: tableData.data,
     });
+
   return (
-    <div className="overflow-auto max-h-[600px] font-mono border border-slate-200 rounded-md p-2">
+    <div>
+      <div className="sticky top-0 flex justify-between align-middle py-1 text-xs px-2 bg-green-700 text-white">
+        <div>
+          <h3 className="mt-1">{tableData.data.length} rows returned</h3>
+        </div>
+        <div>
+          <button
+            className="rounded bg-green-600 py-1 px-3"
+            onClick={() => {
+              downloadStringAsFile(csvString, "results.csv");
+            }}
+          >
+            Download CSV
+          </button>
+        </div>
+      </div>
       <table
         {...getTableProps()}
         className="table-auto border-collapse border border-slate-300"
@@ -48,7 +67,10 @@ export default function Table({ csvString }: TableProps) {
           {rows.map((row) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()} className="even:bg-gray-50 odd:bg-white">
+              <tr
+                {...row.getRowProps()}
+                className="even:bg-gray-50 odd:bg-white"
+              >
                 {row.cells.map((cell) => {
                   return (
                     <td

@@ -13,18 +13,22 @@ function App() {
     <div className="h-full flex flex-col w-screen">
       <Header />
       <div className="flex h-full">
-        <List
-          selectedQueryId={activeQueryId}
-          queries={queries}
-          onClick={(id) => {
-            setActiveQueryId(id);
-          }}
-          onCreate={() => {
-            const newQuery = createQuery();
-            setActiveQueryId(newQuery.id);
-          }}
-        />
-        <QueryRunner queryId={activeQueryId} />
+        <div className="w-80 min-w-[250px]">
+          <List
+            selectedQueryId={activeQueryId}
+            queries={queries}
+            onClick={(id) => {
+              setActiveQueryId(id);
+            }}
+            onCreate={() => {
+              const newQuery = createQuery();
+              setActiveQueryId(newQuery.id);
+            }}
+          />
+        </div>
+        <div className="flex-1 overflow-auto">
+          <QueryRunner queryId={activeQueryId} />
+        </div>
       </div>
     </div>
   );

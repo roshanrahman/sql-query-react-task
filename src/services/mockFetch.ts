@@ -6,7 +6,7 @@ export async function mockFetchFunction(sqlQuery: string): Promise<string> {
   // Randomly choose to error
   const randomNumber = Math.random();
   if (randomNumber < 0.2) {
-    throw new Error("Simulated network error");
+    throw new Error("Mock Fetch: Simulated network error");
   }
 
   let url = "/mockData/customers.csv";
@@ -15,9 +15,13 @@ export async function mockFetchFunction(sqlQuery: string): Promise<string> {
   }
 
   // Fetch results from mock files
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch ${url}: Status ${response.status}.`);
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Network Error ${url}: Status ${response.status}.`);
+    }
+    return await response.text();
+  } catch (error) {
+    throw new Error(`Network Error ${url}: ${(error as Error).message}`);
   }
-  return await response.text();
 }
