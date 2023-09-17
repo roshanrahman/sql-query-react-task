@@ -20,7 +20,7 @@ export default function QueryRunner({ queryId }: QueryRunnerProps) {
     return <h1>No query with the ID {queryId} was found</h1>;
   }
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col flex-1 max-h-screen">
       <QueryInput
         query={query}
         onChange={function (query: Query): void {

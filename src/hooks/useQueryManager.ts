@@ -12,7 +12,7 @@ export function useQueryManager() {
   function createQuery(initialVal?: Query): Query {
     let newQuery: Query = {
       id: generateId(),
-      name: "Untitled Query",
+      name: "",
       sql: "",
     };
 

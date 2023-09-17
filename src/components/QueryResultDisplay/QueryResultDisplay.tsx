@@ -1,4 +1,5 @@
 import { QueryResult } from "@/types/query";
+import Table from "../Table/Table";
 
 export interface QueryResultDisplayProps {
   queryResult: QueryResult | null;
@@ -20,7 +21,7 @@ export default function QueryResultDisplay({
       : queryResult.result?.error;
 
   return (
-    <div className="flex flex-col p-3">
+    <div className="flex flex-col p-3 h-full">
       <div className="flex justify-between py-3 align-middle">
         <h2 className="uppercase tracking-wide text-slate-500 text-sm select-none">
           Results
@@ -29,11 +30,9 @@ export default function QueryResultDisplay({
           Last run: {queryResult?.lastRun.toDateString()}
         </span>
       </div>
-      <textarea
-        className="border-gray-600 border-2 rounded-md py-1"
-        placeholder="Enter SQL Query here"
-        value={data}
-      />
+      <div className="flex-1">
+      <Table csvString={data ?? ''} />
+      </div>
     </div>
   );
 }

@@ -37,7 +37,7 @@ export default function List({
                   }
                 }}
               >
-                {query.name}
+                {query.name.length > 0 ? query.name : "Untitled Query"}
               </button>
             </li>
           );
@@ -58,7 +58,7 @@ export default function List({
             onClick={() => {
               onCreate();
             }}
-            className="w-full text-center cursor-pointer py-2 px-4 border rounded-md border-blue-200 hover:border-blue-700 hover:bg-blue-50 hover:text-blue-700 select-none text-blue-500"
+            className="w-full text-center cursor-pointer py-2 px-4 border rounded-md border-blue-200 hover:border-blue-700 hover:bg-blue-50 hover:text-blue-700 select-none text-blue-700"
           >
             + Create new query
           </button>
