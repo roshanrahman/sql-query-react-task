@@ -6,6 +6,7 @@ export interface QueryInputProps {
   onChange: (query: Query) => void;
   onRun: (query: Query) => void;
   loading?: boolean;
+  onDelete: (query: Query) => void;
 }
 
 function checkSqlQueryForErrors(queryStr: string): string | null {
@@ -20,6 +21,7 @@ export default function QueryInput({
   onChange,
   onRun,
   loading,
+  onDelete,
 }: QueryInputProps) {
   const queryNameInputRef = useRef<HTMLInputElement>(null);
   const querySqlInputRef = useRef<HTMLTextAreaElement>(null);
@@ -72,6 +74,13 @@ export default function QueryInput({
           className="px-8 bg-blue-600 rounded-md text-white hover:bg-blue-500"
         >
           Run
+        </button>
+        <button
+          onClick={() => onDelete(query)}
+          disabled={loading}
+          className="px-5 border-2 border-red-700 rounded-md text-red-700 hover:bg-red-50"
+        >
+          Delete
         </button>
       </div>
       <textarea

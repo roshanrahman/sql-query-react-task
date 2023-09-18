@@ -2,7 +2,7 @@ import { Query } from "@/types/query";
 
 export interface ListProps {
   queries: Query[];
-  selectedQueryId: string;
+  selectedQueryId: string | null;
   onClick: (id: string) => void;
   onCreate: () => void;
 }
@@ -19,7 +19,7 @@ export default function List({
   onCreate,
 }: ListProps) {
   return (
-    <div className="w-full border-gray-100 border-r-2">
+    <div className="w-full border-gray-100 border-r-2 h-full">
       <div className="text-sm tracking-wide text-slate-500  py-2 px-4 border-b border-gray-200 select-none mt-2">
         YOUR QUERIES
       </div>

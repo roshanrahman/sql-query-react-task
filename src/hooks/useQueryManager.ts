@@ -1,3 +1,4 @@
+import { activeQueryIdAtom } from "@/atoms/activeQuery";
 import { queryListAtom } from "@/atoms/queries";
 import { queryResultsListAtom } from "@/atoms/queryResults";
 import { mockFetchFunction } from "@/services/mockFetch";
@@ -8,6 +9,7 @@ import { useAtom } from "jotai";
 export function useQueryManager() {
   const [queryList, setQueryList] = useAtom(queryListAtom);
   const [resultsList, setResultsList] = useAtom(queryResultsListAtom);
+  const [activeQueryId, setActiveQueryId] = useAtom(activeQueryIdAtom);
 
   function createQuery(initialVal?: Query): Query {
     let newQuery: Query = {
@@ -79,6 +81,13 @@ export function useQueryManager() {
       delete resultsList[id];
       return { ...resultsList };
     });
+    if (id === activeQueryId) {
+      setActiveQueryId(
+        Object.keys(queryList)
+          .filter((qId) => qId !== id)
+          .at(-1) ?? null
+      );
+    }
   }
 
   function selectQueryById(id: string) {

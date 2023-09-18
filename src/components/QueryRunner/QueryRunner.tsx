@@ -1,4 +1,3 @@
-import { Query } from "@/types/query";
 import QueryInput from "@/components/QueryInput/QueryInput";
 import QueryResultDisplay from "@/components/QueryResultDisplay/QueryResultDisplay";
 import { useQueryManager } from "@/hooks/useQueryManager";
@@ -12,6 +11,7 @@ export default function QueryRunner({ queryId }: QueryRunnerProps) {
     selectQueryById,
     selectQueryResultById,
     fetchQueryResult,
+    deleteQuery,
   } = useQueryManager();
   const query = selectQueryById(queryId);
   const queryResult = selectQueryResultById(queryId);
@@ -23,11 +23,14 @@ export default function QueryRunner({ queryId }: QueryRunnerProps) {
     <div className="flex flex-col max-h-screen w-full">
       <QueryInput
         query={query}
-        onChange={function (query: Query): void {
+        onChange={(query) => {
           updateQueryData(query);
         }}
-        onRun={function (query: Query): void {
+        onRun={(query) => {
           fetchQueryResult(query);
+        }}
+        onDelete={(query) => {
+          deleteQuery(query.id);
         }}
       />
       <QueryResultDisplay queryResult={queryResult} />
