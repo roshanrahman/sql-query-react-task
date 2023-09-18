@@ -5,7 +5,7 @@ export async function mockFetchFunction(sqlQuery: string): Promise<string> {
   await waitForSeconds(0.2);
   // Randomly choose to error
   const randomNumber = Math.random();
-  if (randomNumber < 0.1) {
+  if (randomNumber < 0.01) {
     throw new Error("Mock Fetch: Simulated network error");
   }
 
