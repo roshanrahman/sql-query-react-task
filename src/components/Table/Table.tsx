@@ -1,5 +1,5 @@
 import { Column, useTable } from "react-table";
-import { useMemo } from "react";
+import { useMemo, memo } from "react";
 import { csvToJson } from "@/utils/csvToJson";
 import { downloadStringAsFile } from "@/utils/downloadAsString";
 
@@ -7,7 +7,7 @@ export interface TableProps {
   csvString: string;
 }
 
-export default function Table({ csvString }: TableProps) {
+function Table({ csvString }: TableProps) {
   const tableData = useMemo(() => {
     const [headers, ...data] = csvToJson(csvString);
 
@@ -89,3 +89,7 @@ export default function Table({ csvString }: TableProps) {
     </div>
   );
 }
+
+const MemoizedTable = memo(Table);
+
+export default MemoizedTable;

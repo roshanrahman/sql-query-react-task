@@ -1,5 +1,5 @@
 import { Query } from "@/types/query";
-import { useState, useMemo } from "react";
+import { useState, useMemo, memo } from "react";
 
 export interface ListProps {
   queries: Query[];
@@ -13,12 +13,7 @@ const normalStyle =
 const activeStyle =
   "text-start w-full cursor-auto py-2 px-4 border-b border-gray-200 bg-slate-700 text-white select-none";
 
-export default function List({
-  selectedQueryId,
-  queries,
-  onClick,
-  onCreate,
-}: ListProps) {
+function List({ selectedQueryId, queries, onClick, onCreate }: ListProps) {
   const [searchInput, setSearchInput] = useState("");
 
   const filteredQueries = useMemo(() => {
@@ -87,3 +82,6 @@ export default function List({
     </div>
   );
 }
+
+const MemoizedList = memo(List);
+export default MemoizedList;
