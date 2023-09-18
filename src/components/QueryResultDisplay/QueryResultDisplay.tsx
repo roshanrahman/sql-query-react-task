@@ -42,7 +42,6 @@ export default function QueryResultDisplay({
   queryResult,
 }: QueryResultDisplayProps) {
   const componentToRender = useMemo(() => {
-    console.log({ queryResult });
     if (!queryResult) {
       // Query hasn't been run at all
       return <IdleStateComponent />;

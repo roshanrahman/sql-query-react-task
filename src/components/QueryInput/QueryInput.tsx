@@ -52,6 +52,13 @@ export default function QueryInput({
     });
   };
 
+  const handleQueryNameChange = (nameStr: string) => {
+    onChange({
+      ...query,
+      name: nameStr,
+    });
+  };
+
   return (
     <div className="flex flex-col bg-slate-200 p-2 gap-2 w-full">
       <div className="flex gap-2">
@@ -62,10 +69,7 @@ export default function QueryInput({
           placeholder="Name your query"
           value={query.name}
           onChange={(e) => {
-            onChange({
-              ...query,
-              name: e.target.value,
-            });
+            handleQueryNameChange(e.target.value);
           }}
         />
         <button

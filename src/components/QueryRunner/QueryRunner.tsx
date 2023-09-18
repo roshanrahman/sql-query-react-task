@@ -13,6 +13,7 @@ export default function QueryRunner({ queryId }: QueryRunnerProps) {
     fetchQueryResult,
     deleteQuery,
   } = useQueryManager();
+
   const query = selectQueryById(queryId);
   const queryResult = selectQueryResultById(queryId);
 

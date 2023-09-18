@@ -42,17 +42,7 @@ export default function List({
             </li>
           );
         })}
-        {/* <li className="cursor-pointer py-2 px-4 border-b border-gray-200 hover:bg-gray-100 select-none">
-          Item 1
-        </li>
 
-        <li className="cursor-auto py-2 px-4 border-b border-gray-200 bg-slate-700 text-white select-none">
-          Item 3
-        </li>
-
-        <li className="cursor-pointer py-2 px-4 border-b border-gray-200 hover:bg-gray-100 select-none">
-          Item 4
-        </li> */}
         <li className="p-2">
           <button
             onClick={() => {

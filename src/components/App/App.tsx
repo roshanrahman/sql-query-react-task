@@ -33,6 +33,7 @@ function App() {
           {activeQueryId ? (
             <QueryRunner queryId={activeQueryId} />
           ) : (
+            /** When no query is selected */
             <div className="border-2 text-center h-full flex items-center justify-center text-sm text-slate-500">
               <span>Please click on an existing query or </span>
               <button
